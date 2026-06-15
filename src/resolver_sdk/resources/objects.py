@@ -120,10 +120,10 @@ class ObjectsAPI:
         return AssessmentDataResponse(**self.client.safe_get(self.endpoint_get_assessment_data, params=params))
 
     # Retrieve all related objects for a given object & relationship type
-    def get_related_objects(self, obj_id, rel_type_id, by_ref=False):
+    def get_related_objects(self, obj_id, rel_type_id, by_ref=False) -> list[RelatedObjectReference]:
         params = { "byRef" : by_ref }
 
-        return self.client.safe_get(self.endpoint_get_related_objects_by_type.format(objectId=obj_id, relationshipTypeId=rel_type_id), params=params)
+        return [RelatedObjectReference(**obj) for obj in self.client.safe_get(self.endpoint_get_related_objects_by_type.format(objectId=obj_id, relationshipTypeId=rel_type_id), params=params)]
 
     # Relate one object with another, should_clone clones assessment objects when relating assessment objects so 1.1 becomes 1.1.1
     def relate_objects(self, obj_id, rel_type_id, rel_obj_id, by_ref=False, should_clone=False):

@@ -138,9 +138,12 @@ class AssessmentDataResponse(BaseResolverModel):
     clonesByObj : list[ClonesByObject] = Field(alias="clonesGroupByLibraryObjects") # list of objects with all their fields for each clone grouped by the original object id they were cloned from
     cloneAssessments : list[ObjectCloneAssessmentInfo] = Field(alias="clonesWithSharedAssessments") # list of all clones with all their fields without grouping by the original object id they were cloned from
 
-class RelatedObjectsListResponse(BaseResolverModel):
-    pass
+class RelatedObjectReference(BaseResolverModel):
+    name : str = Field(alias="objectName")
+    objectId : int
+    objectTypeId : int
+    externalRefId : str
 
 
-class ObjectRelationshipResponse(BaseResolverModel):
+class RelateObjectsResponse(BaseResolverModel):
     pass
