@@ -42,8 +42,7 @@ from .objects import (
     ObjectCreateResponse,
     AssessmentsUpdateResponse,
     AssessmentDataResponse,
-    RelatedObjectsListResponse,
-    ObjectRelationshipResponse,
+    RelatedObjectReference,
     ObjectBasic,
     ObjectReference,
     ObjectSummary,
@@ -61,9 +60,11 @@ from .roles import (
     RoleDetailResponse,
     RoleDeleteResponse,
 )
+
 from .utility import (
     JobResponse
 )
+
 
 __all__ = [
     # Base models
@@ -102,8 +103,7 @@ __all__ = [
     "ObjectCreateResponse",
     "AssessmentsUpdateResponse",
     "AssessmentDataResponse",
-    "RelatedObjectsListResponse",
-    "ObjectRelationshipResponse",
+    "RelatedObjectReference",
     "ObjectReference",
     "ObjectBasic",
     "ObjectSummary",

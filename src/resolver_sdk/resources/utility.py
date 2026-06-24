@@ -17,6 +17,7 @@ class UtilityAPI:
         # Triggers indefinitely so that job status is constantly polled
         while True:
             # Invoke the API call
+            print("Polling job status....")
             response = self.get_job_details(job_id)
 
             # Checks if job has been executed yet or not

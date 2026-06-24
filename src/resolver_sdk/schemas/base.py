@@ -16,7 +16,7 @@ class Error(BaseResolverModel):
 
 # Evaluation model used in objects endpoint responses to represent field evaluations for objects
 class Evaluation(BaseResolverModel):
-    value: str | int | dict[str, Any] | list[dict[str, Any]] | bool | None = None
+    value: str | int | float | dict[str, Any] | list[dict[str, Any]] | list[int] | bool | None = None
     fieldId : int | str | None = None
 
 # Evaluation model used in objects endpoint responses to represent field evaluations for objects where the response contains a more extended set of fields/ properties for the evaluation compared to Evaluation
@@ -31,7 +31,7 @@ class Formula(BaseResolverModel):
     color : str | None = None
     label : int | str | None = None
     range : str | None = None
-    value : int | float
+    value : int | float | None = None
     rangeId : int | None = None
     formulaName : str | None = None
     lastCalculated : str | None = None
