@@ -12,6 +12,7 @@ class ObjectsAPI:
     endpoint_get_assessment_data = "/data/object/assessment/allRelatedAssessmentData"
     endpoint_get_related_objects_by_type = "/data/object/{objectId}/relationships/{relationshipTypeId}"
     endpoint_relate_objects = "/creation/creation/{objectId}/relationship/{relationshipTypeId}/relatedObject/{relatedObjectId}"
+    endpoint_get_recently_created_objs = "/data/object/created"
 
     # Initializes the ObjectsAPI with a client reference
     def __init__(self, client):
@@ -123,7 +124,9 @@ class ObjectsAPI:
     def get_related_objects(self, obj_id, rel_type_id, by_ref=False) -> list[RelatedObjectReference]:
         params = { "byRef" : by_ref }
 
-        return [RelatedObjectReference(**obj) for obj in self.client.safe_get(self.endpoint_get_related_objects_by_type.format(objectId=obj_id, relationshipTypeId=rel_type_id), params=params)]
+        objs = self.client.safe_get(self.endpoint_get_related_objects_by_type.format(objectId=obj_id, relationshipTypeId=rel_type_id), params=params)
+
+        return [RelatedObjectReference(**obj) for obj in objs]
 
     # Relate one object with another, should_clone clones assessment objects when relating assessment objects so 1.1 becomes 1.1.1
     def relate_objects(self, obj_id, rel_type_id, rel_obj_id, by_ref=False, should_clone=False) -> None:
@@ -133,3 +136,17 @@ class ObjectsAPI:
         }
 
         self.client.safe_post(self.endpoint_relate_objects.format(objectId=obj_id, relationshipTypeId=rel_type_id, relatedObjectId=rel_obj_id), params=params)
+
+    def get_recently_created_objs(self, obj_type_ref_id, since="1970-01-01T00:00:00.000Z", startingId=None, pageSize=100, pageNumber=None, includeCount=True):
+        params = {
+            "objectTypeRefId": obj_type_ref_id,
+            "since": since,
+            "startingId": startingId,
+            "pageSize": pageSize,
+            "pageNumber": pageNumber,
+            "includeCount": str(includeCount).lower()
+        }
+
+        response = self.client.safe_get(self.endpoint_get_recently_created_objs, params=params)
+        
+        return response
