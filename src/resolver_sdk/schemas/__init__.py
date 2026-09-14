@@ -61,6 +61,10 @@ from .roles import (
     RoleDeleteResponse,
 )
 
+from .user_groups import (
+    UserInfo,
+)
+
 from .utility import (
     JobResponse
 )
@@ -118,6 +122,8 @@ __all__ = [
     "RoleMembersResponse",
     "RoleDetailResponse",
     "RoleDeleteResponse",
+    # User Groups
+    "UserInfo",
     # Utility
     "JobResponse"
 ]

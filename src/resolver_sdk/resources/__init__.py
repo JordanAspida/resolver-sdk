@@ -6,5 +6,6 @@ from .roles import RolesAPI
 from .objects import ObjectsAPI
 from .utility import UtilityAPI
 from.formulas import FormulasAPI
+from .user_groups import UserGroupsAPI
 
-__all__ = ["ApplicationsAPI", "FormsAPI", "LifecycleAPI", "ReportsAPI", "RolesAPI", "ObjectsAPI", "UtilityAPI", "FormulasAPI"]
+__all__ = ["ApplicationsAPI", "FormsAPI", "LifecycleAPI", "ReportsAPI", "RolesAPI", "ObjectsAPI", "UtilityAPI", "FormulasAPI", "UserGroupsAPI"]

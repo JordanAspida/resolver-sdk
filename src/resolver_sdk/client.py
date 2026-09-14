@@ -6,6 +6,7 @@ from .resources.roles import RolesAPI
 from .resources.objects import ObjectsAPI
 from .resources.utility import UtilityAPI
 from .resources.formulas import FormulasAPI
+from .resources.user_groups import UserGroupsAPI
 from .transport import ResolverTransport
 
 
@@ -40,6 +41,7 @@ class ResolverClient:
         self.objects = ObjectsAPI(self)
         self.utility = UtilityAPI(self)
         self.formulas = FormulasAPI(self)
+        self.user_groups = UserGroupsAPI(self)
 
     # Delegates HTTP request to transport layer and tracks API call count
     def request(self, *args, **kwargs):
