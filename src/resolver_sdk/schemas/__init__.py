@@ -12,6 +12,13 @@ from .base import (
     RoleEvaluationRequest,
     FileRequest,
     User,
+    FieldOptionDetails,
+    FieldDetails,
+    RelationshipDetails,
+    FormulaRange,
+    FormulaDetails,
+    RoleDetails,
+    ReportDetails
     )
 from .applications import (
     ApplicationsListResponse,
@@ -20,20 +27,22 @@ from .applications import (
     ViewsListResponse,
 )
 from .forms import (
-    FormsListResponse,
-    FormStructureResponse,
-    FormDeleteResponse,
-    FormReportsResponse,
-    FormFormulasResponse,
-    FormRolesResponse,
-    NavFormLoadResponse,
+    FormDetails,
+    FormRules,
+    FormSection,
+    FormComponent,
+    FormStructure,
+    NavFormNode,
+    NodeStateConfig
 )
 from .lifecycle import (
     LifecyclesListResponse,
     StatesAndTransitionsResponse,
-    StateActionsResponse,
-    TransitionsListResponse,
-    TransitionActionsResponse,
+    StateDetails,
+    TriggerDetails,
+    TransitionDetails,
+    ActionDetails,
+    ActionInfo
 )
 from .objects import (
     ObjectsListResponse,
@@ -48,21 +57,30 @@ from .objects import (
     ObjectSummary,
     ObjectCloneInfo,
     ObjectCloneAssessmentInfo,
+    ObjectTrigger,
+    ActivateTriggerResponse,
 )
 from .reports import (
     ReportsListResponse,
     ReportComponentsListResponse,
-    ReportDeleteResponse,
+    TableColumn,
+    ComponentProperties
 )
 from .roles import (
-    RolesListResponse,
-    RoleMembersResponse,
-    RoleDetailResponse,
-    RoleDeleteResponse,
+    RoleDetails,
+    RoleMembers,
+    UserDetails,
+    RolePermissions,
+    LifecycleId
 )
 
 from .user_groups import (
     UserInfo,
+)
+
+from .data_definitions import (
+    DataDefinitionDetails,
+    DataDefinitionDependents
 )
 
 from .utility import (
@@ -81,25 +99,34 @@ __all__ = [
     "RoleEvaluationRequest",
     "FileRequest",
     "User",
+    "FieldOptionDetails",
+    "FieldDetails",
+    "RelationshipDetails",
+    "FormulaRange",
+    "FormulaDetails",
+    "RoleDetails",
+    "ReportDetails",
     # Applications
     "ApplicationsListResponse",
     "ActivitiesListResponse",
     "ActionsListResponse",
     "ViewsListResponse",
     # Forms
-    "FormsListResponse",
-    "FormStructureResponse",
-    "FormDeleteResponse",
-    "FormReportsResponse",
-    "FormFormulasResponse",
-    "FormRolesResponse",
-    "NavFormLoadResponse",
+    "FormDetails",
+    "FormRules",
+    "FormSection",
+    "FormComponent",
+    "FormStructure",
+    "NavFormNode",
+    "NodeStateConfig",
     # Lifecycle
     "LifecyclesListResponse",
     "StatesAndTransitionsResponse",
-    "StateActionsResponse",
-    "TransitionsListResponse",
-    "TransitionActionsResponse",
+    "StateDetails",
+    "TriggerDetails",
+    "TransitionDetails",
+    "ActionDetails",
+    "ActionInfo",
     # Objects
     "ObjectsListResponse",
     "ObjectDetailResponse",
@@ -113,17 +140,24 @@ __all__ = [
     "ObjectSummary",
     "ObjectCloneInfo",
     "ObjectCloneAssessmentInfo",
+    "ObjectTrigger",
+    "ActivateTriggerResponse",
     # Reports
     "ReportsListResponse",
     "ReportComponentsListResponse",
-    "ReportDeleteResponse",
+    "TableColumn",
+    "ComponentProperties",
     # Roles
-    "RolesListResponse",
-    "RoleMembersResponse",
-    "RoleDetailResponse",
-    "RoleDeleteResponse",
+    "RoleDetails",
+    "RoleMembers",
+    "UserDetails",
+    "RolePermissions",
+    "LifecycleId",
     # User Groups
     "UserInfo",
+    # Data Definitions
+    "DataDefinitionDetails",
+    "DataDefinitionDependents",
     # Utility
     "JobResponse"
 ]

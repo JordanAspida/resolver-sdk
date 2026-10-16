@@ -9,8 +9,20 @@ class BaseResolverModel(BaseModel):
     """Base model for all Resolver SDK Pydantic models with extra fields allowed."""
     model_config = ConfigDict(extra="allow")
 
-# common models used across multiple endpoints/ resources
+# Common model for Object type details
+class ObjectTypeDetails(BaseResolverModel):
+    id: int
+    name: str
+    pluralName: str | None = None
+    description: str | None = None
+    monogram : str | None = None
+    defaultLifecycleId : int = Field(alias="objectLifeCycleId") 
+    externalRefId : str | None = None
+    created : str | None = None
+    assessment : bool | None = None
+    isLibrary : bool | None = Field(None, alias="isLibraryObjectType")
 
+# common models used across multiple endpoints/ resources
 class Error(BaseResolverModel):
     errorMessage : str
 
@@ -107,3 +119,113 @@ class MessageRequest(BaseResolverModel):
     searchIndexRequests : list[SearchIndexRequest]
     evaluationFormulaUpdateRequests : list[bool]
     relationshipFormulaUpdateRequests : list[bool]
+
+# Model to map the details of a field option
+class FieldOptionDetails(BaseResolverModel):
+    id : int
+    fieldId : int
+    label : str | None = None
+    numeric : int
+    color : str | None = None
+    ordinal : int
+    defaultOption : bool
+    created : str
+    modified : str | None = None
+    isSystemConfig : bool
+    externalRefId : str
+
+# Model to map the details of a field
+class FieldDetails(BaseResolverModel):
+    id : int
+    name : str 
+    description : str | None = None
+    uniqueName : str
+    type : int
+    longName : str | None = None
+    created : str
+    modified : str | None = None
+    properties : dict[Any, Any] = Field(default_factory=dict)
+    defaultSelection : int | None = None
+    nextFieldOptionOrdinal : int | None = None
+    isSystemConfig : bool
+    options : list[FieldOptionDetails] = Field(default_factory=list)
+    externalRefId : str
+
+# Model to map the details of a relationship
+class RelationshipDetails(BaseResolverModel):
+    id : int
+    name : str 
+    description : str | None = None
+    longName : str | None = None
+    referenceName : str | None = None
+    referenceDescription : str | None = None
+    objectTypeId : int
+    objectTypeGroupId : int | None = None
+    maximumAllowedEdges : int
+    created : str
+    modified : str | None = None
+    isSystemConfig : bool
+    externalRefId : str
+
+# Model to map the details of a formula range
+class FormulaRange(BaseResolverModel):
+    id : int
+    name : str | None = None
+    formulaId : int
+    maximum : float
+    colour : str | None = Field(default=None, alias="color")
+    created : str
+    modified : str | None = None
+    objectLifeCycleId : int | None = None
+    externalRefId : str
+
+# Model to map the details of a formula
+class FormulaDetails(BaseResolverModel):
+    id : int 
+    name : str
+    description : str | None = None
+    script : str | None = None
+    format : str | int | None = None
+    formatStyle : int | None = None
+    formatCurrency : str | int | None = None
+    rangeStyle : int | None = None
+    objectTypeId : int
+    type : int
+    created : str
+    modified : str | None = None
+    transitionId : int | None = None
+    metadata : dict[Any, Any] | None = None
+    objectLifeCycleId : int | None = None
+    retentionEnabled : bool
+    isSystemConfig : bool
+    ranges : list[FormulaRange] = Field(default_factory=list)
+    externalRefId : str
+
+# Model to map the details of a role
+class RoleDetails(BaseResolverModel):
+    id : int
+    name : str
+    description : str | None = None
+    isGlobal : bool
+    created : str
+    modified : str | None = None
+    canPerformSearch : bool
+    canQuickCreate : bool
+    canGetHelp : bool
+    canSearchArchive : bool
+    externalRefId : str
+
+# Model to map the details of the report
+class ReportDetails(BaseResolverModel):
+    id : int
+    name : str
+    description : str | None = None
+    objectTypeId : int 
+    created : str
+    modified : str | None = None
+    nextReportComponentOrdinal : int | None = None
+    type : int
+    showArchiveData : bool
+    enableReportExports : bool
+    orientation : int | None = None
+    externalRefId : str

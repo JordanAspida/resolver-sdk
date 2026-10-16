@@ -144,3 +144,21 @@ class RelatedObjectReference(BaseResolverModel):
     objectId : int
     objectTypeId : int
     externalRefId : str
+
+# used to map the response from the activate object trigger endpoint
+class ActivateTriggerResponse(BaseResolverModel):
+    success : bool
+    newStateId : int | None
+    orchestrationTasks : list[Any] | None = Field(default_factory=list)
+    createdObjectIds : list[int] | None = Field(default_factory=list)
+    createdObjectRelationshipTypeIds : list[int] | None = Field(default_factory=list)
+    searchReindex : bool
+
+# used to map the response from the get triggers for an object endpoint
+class ObjectTrigger(BaseResolverModel):
+    id : int 
+    type : int
+    name : str
+    description : str | None = None
+    objectLifeCycleId : int
+    externalRefId : str | None = None

@@ -1,3 +1,5 @@
+from .resources.data_definitions import DataDefinitionsAPI
+from .resources.fields import FieldsAPI
 from .resources.forms import FormsAPI
 from .resources.applications import ApplicationsAPI
 from .resources.reports import ReportsAPI
@@ -30,6 +32,7 @@ class ResolverClient:
             "all_object_types": None,
             "all_data_defs": None,
             "all_webhooks": None,
+            "form_structures" : {}
         }
         self.cache_derived = {}
 
@@ -42,6 +45,8 @@ class ResolverClient:
         self.utility = UtilityAPI(self)
         self.formulas = FormulasAPI(self)
         self.user_groups = UserGroupsAPI(self)
+        self.fields = FieldsAPI(self)
+        self.data_definitions = DataDefinitionsAPI(self)
 
     # Delegates HTTP request to transport layer and tracks API call count
     def request(self, *args, **kwargs):

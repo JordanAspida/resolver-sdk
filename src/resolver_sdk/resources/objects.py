@@ -13,6 +13,9 @@ class ObjectsAPI:
     endpoint_get_related_objects_by_type = "/data/object/{objectId}/relationships/{relationshipTypeId}"
     endpoint_relate_objects = "/creation/creation/{objectId}/relationship/{relationshipTypeId}/relatedObject/{relatedObjectId}"
     endpoint_get_recently_created_objs = "/data/object/created"
+    endpoint_activate_object_trigger = "/data/object/{id}/trigger/{triggerId}/go"
+    endpoint_get_triggers_obj = "/data/object/{id}/triggers"
+    endpoint_update_object_state = "/data/object/{id}/transition/{stateId}"
 
     # Initializes the ObjectsAPI with a client reference
     def __init__(self, client):
@@ -137,6 +140,7 @@ class ObjectsAPI:
 
         self.client.safe_post(self.endpoint_relate_objects.format(objectId=obj_id, relationshipTypeId=rel_type_id, relatedObjectId=rel_obj_id), params=params)
 
+    # Endpoint seems not to work as expected, returns empty array even when objects have been created. Will need to investigate further with Resolver team
     def get_recently_created_objs(self, obj_type_ref_id, since="1970-01-01T00:00:00.000Z", startingId=None, pageSize=100, pageNumber=None, includeCount=True):
         params = {
             "objectTypeRefId": obj_type_ref_id,
@@ -150,3 +154,23 @@ class ObjectsAPI:
         response = self.client.safe_get(self.endpoint_get_recently_created_objs, params=params)
         
         return response
+
+    # Activates a trigger on a specific object 
+    def activate_object_trigger(self, obj_id, trigger_id, by_ref=False) -> ActivateTriggerResponse:
+        params = {
+            "byRef": str(by_ref).lower()
+        }
+
+        resp = self.client.safe_post(self.endpoint_activate_object_trigger.format(id=obj_id, triggerId=trigger_id), params=params)
+        return ActivateTriggerResponse(**resp)
+
+    # Retrieves all triggers available to an object in its current state
+    def get_triggers_obj(self, obj_id) -> list[ObjectTrigger]:
+
+        resp = self.client.safe_get(self.endpoint_get_triggers_obj.format(id=obj_id))
+        return [ObjectTrigger(**trigger) for trigger in resp.get("data", [])]
+
+    # Updates the state of a specific object to a new state - returns nothing if successful
+    def update_object_state(self, obj_id, state_id):
+
+        self.client.safe_post(self.endpoint_update_object_state.format(id=obj_id, stateId=state_id))
