@@ -9,6 +9,8 @@ from .resources.objects import ObjectsAPI
 from .resources.utility import UtilityAPI
 from .resources.formulas import FormulasAPI
 from .resources.user_groups import UserGroupsAPI
+from .resources.object_types import ObjectTypesAPI
+from .resources.object_type_groups import ObjectTypeGroupsAPI
 from .transport import ResolverTransport
 
 
@@ -47,6 +49,8 @@ class ResolverClient:
         self.user_groups = UserGroupsAPI(self)
         self.fields = FieldsAPI(self)
         self.data_definitions = DataDefinitionsAPI(self)
+        self.object_types = ObjectTypesAPI(self)
+        self.object_type_groups = ObjectTypeGroupsAPI(self)
 
     # Delegates HTTP request to transport layer and tracks API call count
     def request(self, *args, **kwargs):

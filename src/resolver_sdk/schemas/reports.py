@@ -42,6 +42,13 @@ class TableColumn(BaseResolverModel):
     path : str | None = None
     externalRefId : str
 
+class Series(BaseResolverModel):
+    series : int | None = None
+    xAxisType : int | None = None
+    xValue : int | str | None = None
+    yAxisType : int | None = None
+    yValue : int | str | None = None
+    label : str | None = None
 
 class ComponentProperties(BaseResolverModel):
     enabledForms : dict = Field(default_factory=dict)
@@ -59,6 +66,7 @@ class ComponentProperties(BaseResolverModel):
     groupByType : Optional[int] = None
     groupById : Optional[int] = None
     displayColourMode : Optional[int] = Field(default=None, alias="displayColorMode")
+    series : Optional[list[Series]] = None
 
 class ReportComponentsListResponse(BaseResolverModel):
     id : int

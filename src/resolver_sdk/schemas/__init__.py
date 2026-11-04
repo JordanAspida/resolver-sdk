@@ -83,6 +83,18 @@ from .data_definitions import (
     DataDefinitionDependents
 )
 
+from .formulas import (
+    FormulaDetails
+)
+
+from .object_types import (
+    ExpandedObjectTypeDetails
+)
+
+from .object_type_groups import (
+    ObjectTypeGroupDetails
+)
+
 from .utility import (
     JobResponse
 )
@@ -158,6 +170,12 @@ __all__ = [
     # Data Definitions
     "DataDefinitionDetails",
     "DataDefinitionDependents",
+    # Formulas
+    "FormulaDetails",
+    # Object Types
+    "ExpandedObjectTypeDetails",
+    # Object Type Groups
+    "ObjectTypeGroupDetails",
     # Utility
     "JobResponse"
 ]
