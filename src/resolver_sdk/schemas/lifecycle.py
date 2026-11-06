@@ -84,6 +84,7 @@ class StateDetails(BaseResolverModel):
     modified : str | None = None
     org : int
     objectLifeCycleId : int
+    externalRefId : Optional[str] | None = None
     creation : Optional[bool] | None = None
     triggers : Optional[list[int]] | None = None
 

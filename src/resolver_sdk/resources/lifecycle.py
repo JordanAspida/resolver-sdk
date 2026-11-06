@@ -1,4 +1,4 @@
-from ..schemas.lifecycle import LifecyclesListResponse, StatesAndTransitionsResponse, ActionDetails, TransitionDetails, ActionInfo
+from ..schemas.lifecycle import LifecyclesListResponse, StatesAndTransitionsResponse, ActionDetails, TransitionDetails, ActionInfo, StateDetails
 from ..transport import logger
 
 class LifecycleAPI:
@@ -7,6 +7,7 @@ class LifecycleAPI:
     endpoint_get_states = "/object/objectType/{objectTypeId}/objectLifeCycle/{objectLifeCycleId}/state"
     endpoint_get_transitions = "/object/objectType/{objectTypeId}/objectLifeCycle/{objectLifeCycleId}/trigger/{triggerId}/transition"
     endpoint_get_transition_actions = "/object/objectType/{objectTypeId}/objectLifeCycle/{objectLifeCycleId}/transition/{transitionId}/action"
+    endpoint_get_state = "/object/objectType/{objectTypeId}/objectLifeCycle/{objectLifeCycleId}/state/{id}"
     
     # Initializes the LifecycleAPI with a client reference
     def __init__(self, client):
@@ -47,3 +48,8 @@ class LifecycleAPI:
     def get_transition_actions(self, obj_type_id, lifecycle_id, transition_id) -> list[ActionInfo]:
         response = self.client.safe_get(self.endpoint_get_transition_actions.format(objectTypeId=obj_type_id, objectLifeCycleId=lifecycle_id, transitionId=transition_id))
         return [ActionInfo(**action) for action in response]
+
+    # Retrieves details of a specific state in a lifecycle
+    def get_state(self, obj_type_id, lifecycle_id, state_id) -> StateDetails:
+        response = self.client.safe_get(self.endpoint_get_state.format(objectTypeId=obj_type_id, objectLifeCycleId=lifecycle_id, id=state_id))
+        return StateDetails(**response)
